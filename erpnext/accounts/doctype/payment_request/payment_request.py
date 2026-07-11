@@ -1334,8 +1334,12 @@ def get_available_payment_schedules(reference_doctype: str, reference_name: str)
 	existing_refs = get_existing_payment_references(reference_name)
 	existing_ids = {r["payment_schedule"] for r in existing_refs if r.get("payment_schedule")}
 
-	return [r for r in ref_doc.payment_schedule if r.name not in existing_ids]
+	schedules = [r for r in ref_doc.payment_schedule if r.name not in existing_ids]
 
+	for row in schedules:
+		row.currency = ref_doc.currency
+
+	return schedules
 
 def get_existing_payment_references(reference_name):
 	PR = frappe.qb.DocType("Payment Request")

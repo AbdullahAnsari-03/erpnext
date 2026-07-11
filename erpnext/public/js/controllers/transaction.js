@@ -573,6 +573,7 @@ erpnext.TransactionController = class TransactionController extends erpnext.taxe
 							label: __("Amount"),
 							in_list_view: 1,
 							read_only: 1,
+							options: "currency",
 						},
 					],
 				},
